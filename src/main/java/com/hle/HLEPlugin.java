@@ -19,7 +19,7 @@ public class HLEPlugin extends Plugin
 {
 
 	@Inject
-	private HLEReorder hleReorder;
+	private HLEPrayerReorder hlePrayerReorder;
 	@Inject
 	private ClientToolbar clientToolbar;
 	@Inject
@@ -42,7 +42,7 @@ public class HLEPlugin extends Plugin
 		clientToolbar.addNavigation(navButton);
 		if (client.getGameState() == GameState.LOGGED_IN)
 		{
-			hleReorder.startUp();
+			hlePrayerReorder.startUp();
 		}
 	}
 
@@ -50,7 +50,7 @@ public class HLEPlugin extends Plugin
 	protected void shutDown() throws Exception
 	{
 		clientToolbar.removeNavigation(navButton);
-		hleReorder.shutDown();
+		hlePrayerReorder.shutDown();
 
 		panel = null;
 	}
@@ -58,7 +58,7 @@ public class HLEPlugin extends Plugin
 	@Override
 	public void resetConfiguration()
 	{
-		hleReorder.reset();
+		hlePrayerReorder.reset();
 	}
 
 	@Provides

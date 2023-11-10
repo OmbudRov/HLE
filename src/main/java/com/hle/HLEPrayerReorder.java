@@ -31,7 +31,7 @@ import org.apache.commons.lang3.ArrayUtils;
 
 @Slf4j
 @RequiredArgsConstructor(onConstructor = @__(@Inject))
-class HLEReorder
+class HLEPrayerReorder
 {
 	private static final int PRAYER_X_OFFSET = 37;
 	private static final int PRAYER_Y_OFFSET = 37;

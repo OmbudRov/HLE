@@ -17,16 +17,16 @@ import net.runelite.client.ui.PluginPanel;
 public class HLEPanel extends PluginPanel
 {
 	private final HLEPlugin plugin;
-	private final HLEReorder hleReorder;
+	private final HLEPrayerReorder hlePrayerReorder;
 	private final Client client;
 
 
 	@Inject
-	HLEPanel(final ClientThread clientThread, final HLEPlugin plugin, final Client client, final HLEReorder hleReorder)
+	HLEPanel(final ClientThread clientThread, final HLEPlugin plugin, final Client client, final HLEPrayerReorder hlePrayerReorder)
 	{
 		this.plugin = plugin;
 		this.client = client;
-		this.hleReorder = hleReorder;
+		this.hlePrayerReorder = hlePrayerReorder;
 
 		setBorder(new EmptyBorder(10, 10, 10, 10));
 		setBorder(new EmptyBorder(10, 10, 10, 10));
@@ -69,13 +69,13 @@ public class HLEPanel extends PluginPanel
 
 		randomizePrayersButton.addActionListener(e -> {
 			clientThread.invokeLater(() -> {
-				hleReorder.setShuffledOrder();
-				hleReorder.rebuildPrayers();
+				hlePrayerReorder.setShuffledOrder();
+				hlePrayerReorder.rebuildPrayers();
 			});
 		});
 
 		resetPrayersButton.addActionListener(e -> {
-			hleReorder.reset();
+			hlePrayerReorder.reset();
 		});
 	}
 }
