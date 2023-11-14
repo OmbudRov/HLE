@@ -52,6 +52,7 @@ class HLEPrayerReorder
 
 	void shutDown()
 	{
+		clientThread.invokeLater(this::reset);
 		clientThread.invokeLater(this::redrawPrayers);
 	}
 

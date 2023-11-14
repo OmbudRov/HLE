@@ -1,12 +1,15 @@
 package com.hle;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import javax.inject.Inject;
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import net.runelite.api.Client;
@@ -47,6 +50,19 @@ public class HLEPanel extends PluginPanel
 		constraints.fill = GridBagConstraints.HORIZONTAL;
 		constraints.insets = new Insets(0, 2, 4, 2);
 
+
+		prayerSetup(constraints,topPanel,layoutPanel,clientThread);
+		iconSetup(constraints,topPanel,layoutPanel,clientThread);
+
+	}
+
+	private void prayerSetup(GridBagConstraints constraints, JPanel topPanel, JPanel layoutPanel, ClientThread clientThread)
+	{
+		JLabel prayersLabel = new JLabel("Prayers");
+		prayersLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+		layoutPanel.add(prayersLabel);
+		layoutPanel.add(Box.createVerticalStrut(5));
+
 		constraints.gridx = 0;
 		constraints.gridy = 0;
 		constraints.gridwidth = 2;
@@ -64,7 +80,7 @@ public class HLEPanel extends PluginPanel
 		randomizePrayersButton.setText("Randomize Prayers");
 		randomizePrayersButton.setFocusable(false);
 
-		resetPrayersButton.setText("Reset Prayers");
+		resetPrayersButton.setText("Reset Prayer");
 		resetPrayersButton.setFocusable(false);
 
 		randomizePrayersButton.addActionListener(e -> {
@@ -76,6 +92,42 @@ public class HLEPanel extends PluginPanel
 
 		resetPrayersButton.addActionListener(e -> {
 			hlePrayerReorder.reset();
+		});
+	}
+
+	private void iconSetup(GridBagConstraints constraints, JPanel topPanel, JPanel layoutPanel, ClientThread clientThread)
+	{
+		JLabel iconsLabel = new JLabel("Icons");
+		iconsLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+		layoutPanel.add(iconsLabel);
+		layoutPanel.add(Box.createVerticalStrut(5));
+
+		constraints.gridx = 0;
+		constraints.gridy = 3;
+		constraints.gridwidth = 2;
+		JButton randomizeIconsButton = new JButton();
+		topPanel.add(randomizeIconsButton, constraints);
+
+		constraints.gridx = 0;
+		constraints.gridy = 4;
+		constraints.gridwidth = 2;
+		JButton resetIconsButton = new JButton();
+		topPanel.add(resetIconsButton, constraints);
+
+		layoutPanel.add(topPanel);
+
+		randomizeIconsButton.setText("Randomize Icons");
+		randomizeIconsButton.setFocusable(false);
+
+		resetIconsButton.setText("Reset Icons");
+		resetIconsButton.setFocusable(false);
+
+		randomizeIconsButton.addActionListener(e -> {
+			clientThread.invokeLater(plugin::iconShuffler);
+		});
+
+		resetIconsButton.addActionListener(e -> {
+			plugin.iconShuffler();
 		});
 	}
 }
